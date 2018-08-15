@@ -1,4 +1,4 @@
-import { takeLatest, put } from "redux-saga/effects";
+import { takeLatest, put, all } from "redux-saga/effects";
 import { GET_PRODUCTS } from "../actionTypes/product";
 import {
   getProductsSuccess,
@@ -7,7 +7,7 @@ import {
 
 function* getProducts() {
   try {
-    const response = yield fetch("http://172.16.33.210:4000/products");
+    const response = yield fetch("http://192.168.1.100:4000/products");
     const products = yield response.json();
     yield put(getProductsSuccess(products));
   } catch (err) {
@@ -16,5 +16,5 @@ function* getProducts() {
 }
 
 export function* productsWatcher() {
-  yield [takeLatest(GET_PRODUCTS, getProducts)];
+  yield all([takeLatest(GET_PRODUCTS, getProducts)]);
 }

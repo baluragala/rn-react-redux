@@ -8,6 +8,7 @@ export default function productReducer(
   prevState = { isLoading: false, products: [] },
   action
 ) {
+  console.log(action);
   switch (action.type) {
     case GET_PRODUCTS:
       return { ...prevState, isLoading: true };
